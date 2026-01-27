@@ -8,9 +8,6 @@
  */
 
 
-
-
-
 /*-----------------------------------*\
   #CUSTOM PROPERTY
 \*-----------------------------------*/
@@ -112,9 +109,6 @@
 }
 
 
-
-
-
 /*-----------------------------------*\
   #RESET
 \*-----------------------------------*/
@@ -158,9 +152,6 @@ html { font-family: var(--ff-poppins); }
 body { background: var(--smoky-black); }
 
 
-
-
-
 /*-----------------------------------*\
   #REUSED STYLE
 \*-----------------------------------*/
@@ -195,6 +186,20 @@ article {
   color: var(--orange-yellow-crayola);
   box-shadow: var(--shadow-1);
   z-index: 1;
+}
+
+/* ✅ Image icons inside icon-box (Resume/Publication/etc.) */
+.icon-box--img::before {
+  display: none !important; /* removes overlay that hides images */
+}
+
+.icon-img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 5; /* keep image above everything */
 }
 
 .icon-box::before {
@@ -292,8 +297,55 @@ article.active {
   z-index: -1;
 }
 
+/* ✅ Skills subtitle + grid (for the icon-based skills section) */
+.skills-subtitle {
+  text-align: center;
+  color: var(--orange-yellow-crayola);
+  font-size: var(--fs-6);
+  margin-bottom: 20px;
+}
 
+/* Grid container */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  justify-items: center;
+}
 
+/* Each icon card */
+/* Each icon card */
+.skill-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.25s ease;
+}
+
+/* ✅ show original icon colors */
+.skill-box img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: none;            
+}
+
+/* Hover effect */
+.skill-box:hover {
+  transform: translateY(-6px);
+}
+
+.skill-box span {
+  color: var(--light-gray);
+  font-size: var(--fs-7);
+}
+
+/* Hover effect */
+.skill-box:hover {
+  transform: translateY(-6px);
+}
 
 
 /*-----------------------------------*\
@@ -305,9 +357,6 @@ main {
   margin-bottom: 75px;
   min-width: 259px;
 }
-
-
-
 
 
 /*-----------------------------------*\
@@ -443,11 +492,7 @@ main {
   font-size: 18px;
 }
 
-
 .social-item .social-link:hover { color: var(--light-gray); }
-
-
-
 
 
 /*-----------------------------------*\
@@ -488,9 +533,6 @@ main {
 .navbar-link.active { color: var(--orange-yellow-crayola); }
 
 
-
-
-
 /*-----------------------------------*\
   #ABOUT
 \*-----------------------------------*/
@@ -505,7 +547,6 @@ main {
 }
 
 .about-text p { margin-bottom: 15px; }
-
 
 
 /**
@@ -595,16 +636,36 @@ main {
 
 .testimonials-item-title { margin-bottom: 7px; }
 
+/* ✅ No truncation / no "..." for skills text */
 .testimonials-text {
   color: var(--light-gray);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
-  display: -webkit-box;
-  line-clamp: 4;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  -webkit-box-orient: unset;
+}
+
+/*  Technical Expertise (icon + title in same line) */
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.skill-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.testimonials-item-title {
+  margin: 0 !important;
 }
 
 
@@ -757,14 +818,35 @@ main {
 .clients-item img:hover { filter: grayscale(0); }
 
 
-
-
-
 /*-----------------------------------*\
   #RESUME
 \*-----------------------------------*/
 
 .article-title { margin-bottom: 30px; }
+
+/* Section header alignment (icon + title) */
+.section-header {
+  display: flex;
+  align-items: center; /* vertical centering */
+  gap: 14px;
+}
+
+/* Remove underline when icon is present */
+.no-underline::after {
+  display: none;
+}
+
+/* Slight vertical nudge so text aligns optically */
+.section-header .article-title {
+  padding-bottom: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Center the icon perfectly */
+.section-header .icon-box {
+  margin-top: 0;
+}
 
 
 /**
@@ -838,7 +920,6 @@ main {
 
 .skills-list { padding: 20px; }
 
-
 .skills-item:not(:last-child) { margin-bottom: 15px; }
 
 .skill .title-wrapper {
@@ -866,9 +947,6 @@ main {
   height: 100%;
   border-radius: inherit;
 }
-
-
-
 
 
 /*-----------------------------------*\
@@ -1027,9 +1105,6 @@ main {
 }
 
 
-
-
-
 /*-----------------------------------*\
   #BLOG
 \*-----------------------------------*/
@@ -1113,9 +1188,6 @@ main {
   font-weight: var(--fw-300);
   line-height: 1.6;
 }
-
-
-
 
 
 /*-----------------------------------*\
@@ -1222,9 +1294,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
 
-
-
-
 /*-----------------------------------*\
   #RESPONSIVE
 \*-----------------------------------*/
@@ -1241,8 +1310,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .clients-item { min-width: calc(33.33% - 10px); }
 
-
-
   /**
    * #PORTFOLIO, BLOG 
    */
@@ -1251,9 +1318,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   .blog-banner-box { height: auto; }
 
 }
-
-
-
 
 
 /**
@@ -1282,8 +1346,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   }
 
-
-
   /**
    * #REUSED STYLE
    */
@@ -1311,8 +1373,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     font-size: 18px;
   }
 
-
-
   /**
    * #MAIN
    */
@@ -1321,8 +1381,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-top: 60px;
     margin-bottom: 100px;
   }
-
-
 
   /**
    * #SIDEBAR
@@ -1367,8 +1425,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: calc(100% - 64px);
   }
 
-
-
   /**
    * #NAVBAR
    */
@@ -1378,8 +1434,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   .navbar-list { gap: 20px; }
 
   .navbar-link { --fs-8: 14px; }
-
-
 
   /**
    * #ABOUT
@@ -1434,9 +1488,13 @@ textarea.form-input::-webkit-resizer { display: none; }
     margin-left: 95px;
   }
 
+  /* ✅ keep full text visible (no clamp at >=580px) */
   .testimonials-text {
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    -webkit-box-orient: unset;
   }
 
   /* testimonials modal */
@@ -1482,8 +1540,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .clients-item { min-width: calc(33.33% - 35px); }
 
-
-
   /**
    * #RESUME
    */
@@ -1500,8 +1556,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .skills-item:not(:last-child) { margin-bottom: 25px; }
 
-
-
   /**
    * #PORTFOLIO, BLOG
    */
@@ -1511,8 +1565,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   .blog-posts-list { gap: 30px; }
 
   .blog-content { padding: 25px; }
-
-
 
   /**
    * #CONTACT
@@ -1542,9 +1594,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 
-
-
-
 /**
  * responsive larger than 768px screen
  */
@@ -1559,8 +1608,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .has-scrollbar::-webkit-scrollbar-button { width: 100px; }
 
-
-
   /**
    * SIDEBAR
    */
@@ -1570,15 +1617,11 @@ textarea.form-input::-webkit-resizer { display: none; }
     gap: 30px 15px;
   }
 
-
-
   /**
    * NAVBAR
    */
 
   .navbar-link { --fs-8: 15px; }
-
-
 
   /**
    * ABOUT
@@ -1592,8 +1635,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .modal-avatar-box img { width: 80px; }
-
-
 
   /**
    * PORTFOLIO
@@ -1626,8 +1667,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .project-list, .blog-posts-list { grid-template-columns: 1fr 1fr; }
 
-
-
   /**
    * CONTACT
    */
@@ -1640,9 +1679,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
   
 }
-
-
-
 
 
 /**
@@ -1667,8 +1703,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   }
 
-
-
   /**
    * REUSED STYLE
    */
@@ -1677,8 +1711,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: 950px;
     box-shadow: var(--shadow-5);
   }
-
-
 
   /**
    * MAIN 
@@ -1691,8 +1723,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: max-content;
     margin: auto;
   }
-
-
 
   /**
    * NAVBAR
@@ -1717,8 +1747,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .navbar-link { font-weight: var(--fw-500); }
 
-
-
   /**
    * ABOUT
    */
@@ -1738,15 +1766,11 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .clients-item { min-width: calc(25% - 38px); }
 
-
-
   /**
    * PORTFOLIO
    */
 
   .project-list { grid-template-columns: repeat(3, 1fr); }
-
-
 
   /**
    * BLOG
@@ -1757,12 +1781,133 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 
-
-
-
 /**
  * responsive larger than 1250px screen
  */
+
+ /* --- Contact Card Beautification --- */
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.service-item {
+  padding: 22px;
+  border-radius: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-3);
+}
+
+.service-icon-box {
+  background: var(--border-gradient-onyx);
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 22px;
+  color: var(--orange-yellow-crayola);
+}
+
+.service-item-title {
+  font-size: var(--fs-4);
+  font-weight: var(--fw-600);
+  margin-bottom: 6px;
+}
+
+/* White glowing links */
+.contact-link-ui {
+  color: var(--white-2) !important;
+  font-size: var(--fs-6);
+  word-break: break-word;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.contact-link-ui:hover {
+  color: var(--orange-yellow-crayola);
+  text-shadow: 0 0 8px hsla(45, 100%, 72%, 0.6);
+  text-decoration: none;
+}
+
+/* Resume download section (GLOBAL) */
+.resume-download-card {
+  position: relative;
+  background: var(--border-gradient-onyx);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 1;
+}
+
+.resume-download-card::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.resume-download-icon {
+  flex-shrink: 0;
+}
+
+.resume-download-text {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+.resume-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--onyx);
+  border: 1px solid var(--jet);
+  color: var(--white-2);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-weight: var(--fw-500);
+  transition: var(--transition-1);
+  white-space: nowrap;
+}
+
+.resume-download-btn ion-icon {
+  color: var(--white-2);
+  font-size: 18px;
+}
+
+.resume-download-btn:hover {
+  background: var(--bg-gradient-yellow-1);
+  color: var(--smoky-black);
+}
+
+.resume-download-btn:hover ion-icon {
+  color: var(--smoky-black);
+}
+
+/* Mobile fix */
+@media (max-width: 580px) {
+  .resume-download-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resume-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 
 @media (min-width: 1250px) {
 
@@ -1786,8 +1931,6 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   body::-webkit-scrollbar-button { height: 60px; }
 
-
-
   /**
    * REUSED STYLE
    */
@@ -1795,8 +1938,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   .sidebar, article { width: auto; }
 
   article { min-height: 100%; }
-
-
 
   /**
    * MAIN
@@ -1816,8 +1957,6 @@ textarea.form-input::-webkit-resizer { display: none; }
     width: 75%;
     margin: 0;
   }
-
-
 
   /**
    * SIDEBAR
@@ -1871,12 +2010,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .social-list { justify-content: center; }
 
-
-
   /**
 	 * RESUME
 	 */
 
   .timeline-text { max-width: 700px; }
+
+
 
 }
